@@ -11,7 +11,7 @@ function restricted(req, res, next) {
   if (req.session.user) {
     next()
   } else {
-    res.status(401).json({ message: 'You shall not pass!' })
+    next({ message: "You shall not pass!", status: 401 })
   }
 }
 
@@ -30,7 +30,7 @@ async function checkUsernameFree(req, res, next) {
       next()
     } 
     else {
-      next({ "message": "Username taken", status: 422 })
+      next({ message: "Username taken", status: 422 })
     }
   } catch (err) {
     next(err)
