@@ -6,7 +6,7 @@
     "message": "You shall not pass!"
   }
 */
-async function restricted(req, res, next) {
+function restricted(req, res, next) {
   if (req.session.user) {
     next()
   } else {
