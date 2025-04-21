@@ -3,7 +3,7 @@
 const router = require('express').Router();
 const { checkUsernameFree, 
         checkUsernameExists, 
-        checkPasswordLength 
+        checkPasswordLength, 
       } = require('./auth-middleware.js');
 
 /**
