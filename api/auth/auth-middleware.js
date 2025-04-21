@@ -23,19 +23,7 @@ function restricted(req, res, next) {
   }
 */
 function checkUsernameFree(req, res, next) {
-  const { username } = req.body
-  if (username) {
-    findBy({ username })
-      .then(users => {
-        if (users.length) {
-          res.status(422).json({ message: 'Username taken' })
-        } else {
-          next()
-        }
-      })
-  } else {
-    next()
-  } 
+  
 }
 
 /*
