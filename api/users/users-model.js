@@ -1,18 +1,11 @@
 const db = require('../../data/db-config');
 
-module.exports = {
-  find,
-  findBy,
-  findById,
-  add,
-}
 
 /**
   resolves to an ARRAY with all users, each user having { user_id, username }
  */
 function find() {
   return db('users')
-    .select('user_id', 'username')
 }
 
 /**
@@ -21,7 +14,6 @@ function find() {
 function findBy(filter) {
   return db('users')
     .where(filter)
-    .select('user_id', 'username')
 }
 
 /**
@@ -29,19 +21,23 @@ function findBy(filter) {
  */
 function findById(user_id) {
   return db('users')
-    .where({ user_id })
+    .where('user_id', user_id)
     .first()
-    .select('user_id', 'username')
 }
 
 /**
   resolves to the newly inserted user { user_id, username }
  */
 async function add(user) {
-  const [id] = await db('users')
-    .insert(user)
-    .returning('user_id', 'username')
-  return findById(id)
+  const [id] =await db('users')
+    .insert(user, 'user_id')
+    return findById(id)
 }
 
 // Don't forget to add these to the `exports` object so they can be required in other modules
+module.exports = {
+  find,
+  findBy,
+  findById,
+  add,
+}
